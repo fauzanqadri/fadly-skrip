@@ -12,9 +12,12 @@ class Ability
   end
   
   def director
+    can :read, Nasabah
+    can :update, Nasabah
   end
   
   def cs
+    can :manage, Nasabah
   end
   
   def teller

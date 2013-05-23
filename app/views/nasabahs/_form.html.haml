@@ -1,0 +1,103 @@
+= form_for @nasabah do |f|
+  - if @nasabah.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@nasabah.errors.count, "error")} prohibited this nasabah from being saved:"
+      %ul
+        - @nasabah.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :nama_lengkap
+    = f.text_field :nama_lengkap
+  .field
+    = f.label :tempat_lahir
+    = f.text_field :tempat_lahir
+  .field
+    = f.label :tanggal_lahir
+    = f.date_select :tanggal_lahir
+  .field
+    = f.label :jenis_kelamin
+    = f.text_field :jenis_kelamin
+  .field
+    = f.label :kewarganegaraan
+    = f.text_field :kewarganegaraan
+  .field
+    = f.label :no_identitas
+    = f.text_field :no_identitas
+  .field
+    = f.label :jenis_identitas
+    = f.text_field :jenis_identitas
+  .field
+    = f.label :expire_identitas
+    = f.date_select :expire_identitas
+  .field
+    = f.label :no_npwp
+    = f.text_field :no_npwp
+  .field
+    = f.label :alamat_rumah
+    = f.text_area :alamat_rumah
+  .field
+    = f.label :alamat_surat
+    = f.text_area :alamat_surat
+  .field
+    = f.label :no_tlp_kantor
+    = f.text_field :no_tlp_kantor
+  .field
+    = f.label :no_ponsel
+    = f.text_field :no_ponsel
+  .field
+    = f.label :no_faximile
+    = f.text_field :no_faximile
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :rekening_koran
+    = f.check_box :rekening_koran
+  .field
+    = f.label :status_pernikahan
+    = f.text_field :status_pernikahan
+  .field
+    = f.label :status_rumah_tinggal
+    = f.text_field :status_rumah_tinggal
+  .field
+    = f.label :no_tlp_rumah
+    = f.text_field :no_tlp_rumah
+  .field
+    = f.label :pekerjaan
+    = f.text_field :pekerjaan
+  .field
+    = f.label :bidang_usaha
+    = f.text_field :bidang_usaha
+  .field
+    = f.label :jenis_rekening
+    = f.text_field :jenis_rekening
+  .field
+    = f.label :tujuan_penggunaan_rekening
+    = f.text_field :tujuan_penggunaan_rekening
+  .field
+    = f.label :tujuan_penggunaan_dana
+    = f.text_field :tujuan_penggunaan_dana
+  .field
+    = f.label :storan_awal
+    = f.text_field :storan_awal
+  .field
+    = f.label :nama_lengkap_ibu_kandung
+    = f.text_field :nama_lengkap_ibu_kandung
+  .field
+    = f.label :agama
+    = f.text_field :agama
+  .field
+    = f.label :current_saldo
+    = f.text_field :current_saldo
+  .field
+    = f.label :approved
+    = f.check_box :approved
+  .field
+    = f.label :approved_at
+    = f.date_select :approved_at
+  .field
+    = f.label :actor_id
+    = f.number_field :actor_id
+  .actions
+    = f.submit 'Save'
