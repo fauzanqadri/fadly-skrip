@@ -11,42 +11,58 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130522125752) do
+ActiveRecord::Schema.define(:version => 20130525183055) do
 
   create_table "nasabahs", :force => true do |t|
     t.string   "nama_lengkap"
-    t.string   "email"
     t.string   "tempat_lahir"
     t.date     "tanggal_lahir"
-    t.string   "agama"
     t.string   "jenis_kelamin"
     t.string   "kewarganegaraan"
     t.string   "no_identitas"
     t.string   "jenis_identitas"
     t.date     "expire_identitas"
+    t.string   "no_npwp"
     t.text     "alamat_rumah"
     t.text     "alamat_surat"
-    t.string   "status_pernikahan"
-    t.string   "status_rumah_tinggal"
-    t.string   "pekerjaan"
-    t.string   "bidang_usaha"
     t.string   "no_tlp_kantor"
     t.string   "no_ponsel"
-    t.string   "no_tlp_rumah"
     t.string   "no_faximile"
-    t.string   "no_npwp"
-    t.string   "nama_lengkap_ibu_kandung"
+    t.string   "email"
     t.boolean  "rekening_koran"
-    t.string   "jenis_rekening"
+    t.string   "status_pernikahan"
+    t.string   "status_rumah_tinggal"
+    t.string   "no_tlp_rumah"
+    t.string   "pekerjaan"
+    t.string   "bidang_usaha"
+    t.string   "sumber_dana"
     t.string   "tujuan_penggunaan_rekening"
     t.string   "tujuan_penggunaan_dana"
-    t.decimal  "storan_awal"
+    t.decimal  "biaya_administrasi"
+    t.string   "nama_lengkap_ibu_kandung"
+    t.string   "agama"
     t.decimal  "current_saldo"
     t.boolean  "approved"
+    t.boolean  "accomplished"
     t.date     "approved_at"
     t.integer  "actor_id"
+    t.integer  "key_storage_id"
+    t.boolean  "is_archive"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "products", :force => true do |t|
+    t.string   "name"
+    t.integer  "version"
+    t.text     "description"
+    t.integer  "month_period"
+    t.integer  "month_credit"
+    t.integer  "first_credit"
+    t.string   "code"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "value"
   end
 
   create_table "users", :force => true do |t|
@@ -65,6 +81,7 @@ ActiveRecord::Schema.define(:version => 20130522125752) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "role"
+    t.boolean  "archives"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

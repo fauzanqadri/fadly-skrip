@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     @user = user || User.new
     send(@user.role) unless (@user.role.nil? || @user.role.blank? )
-    cannot :manage, :all
+    # cannot :manage, :all
   end
   
   def admin

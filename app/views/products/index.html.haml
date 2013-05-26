@@ -1,0 +1,42 @@
+.row-fluid
+	.span6
+		%h3 Products
+	.span6		
+%hr
+
+%table.table.table-bordered.table-hover
+	%thead
+		%tr
+			%th #
+			%th Name
+			%th Month period
+			%th Month credit
+			%th First credit
+			%th Code
+			%th Version
+			%th Action
+	%tbody
+		-i = 1
+		- @products.each do |product|
+			%tr
+				%td= i
+				%td= product.name				
+				%td= product.month_period
+				%td= product.month_credit
+				%td= product.first_credit
+				%td= product.code
+				%td= product.version
+				%td
+					.btn-group
+						= link_to edit_product_path(product), :class => "btn btn-mini btn-primary" do
+							%i.icon-edit
+						= link_to product, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-mini btn-danger" do
+							%i.icon-trash
+						= link_to "#", :class => "btn btn-mini btn-info" do
+							%i.icon-upload-alt
+
+%hr
+
+= link_to new_product_path, :class => "btn btn-primary" do
+	%i.icon-pencil
+	New Product

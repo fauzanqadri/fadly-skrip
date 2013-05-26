@@ -1,0 +1,22 @@
+.row-fluid
+	= form_for @user, :html => {:class => "form-horizontal span8"} do |f|
+		= render 'layouts/shared/alert_object', :object => f.object
+		.control-group
+			= f.label :nama_lengkap, :class => "control-label"
+			.controls
+				=f.text_field :nama_lengkap, :placeholder => "Nama Lengkap", :class => "input-block-level"
+		.control-group
+			= f.label :email, :class => "control-label"
+			.controls
+				=f.text_field :email, :placeholder => "Email", :class => "input-block-level"
+		.control-group
+			= f.label :role, :class => "control-label"
+			.controls
+				=f.select :role, options_for_select(User::ROLES)
+		.form-actions
+			= link_to users_path, :class => "btn" do
+				%i.icon-arrow-left
+				Back
+			%button.btn.btn-primary
+				%i.icon-pencil
+				= @user.new_record? ? "Save" : "Update"

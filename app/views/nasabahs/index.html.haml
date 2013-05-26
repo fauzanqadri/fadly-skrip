@@ -1,79 +1,53 @@
-%h1 Listing nasabahs
+.row-fluid
+	.span6
+		%h3 Data Nasabah
+	.span6		
+%hr
 
-%table
-  %tr
-    %th Nama lengkap
-    %th Tempat lahir
-    %th Tanggal lahir
-    %th Jenis kelamin
-    %th Kewarganegaraan
-    %th No identitas
-    %th Jenis identitas
-    %th Expire identitas
-    %th No npwp
-    %th Alamat rumah
-    %th Alamat surat
-    %th No tlp kantor
-    %th No ponsel
-    %th No faximile
-    %th Email
-    %th Rekening koran
-    %th Status pernikahan
-    %th Status rumah tinggal
-    %th No tlp rumah
-    %th Pekerjaan
-    %th Bidang usaha
-    %th Jenis rekening
-    %th Tujuan penggunaan rekening
-    %th Tujuan penggunaan dana
-    %th Storan awal
-    %th Nama lengkap ibu kandung
-    %th Agama
-    %th Current saldo
-    %th Approved
-    %th Approved at
-    %th Actor
-    %th
-    %th
-    %th
+%table.table.table-bordered
+	%thead
+		%tr
+			%th #
+			%th No Rekening
+			%th Nama lengkap
+			%th Saldo
+			%th No Identitas
+			%th Jenis Kelamin
+			%th Jenis Product
+			%th Actor
+			%th Approved
+			%th Acomplish
+			%th Action
+	%tbody
+		- i = 1
+		- @nasabahs.each do |nasabah|
+			%tr
+				%td= i
+				%td No Rekening
+				%td= nasabah.nama_lengkap
+				%td= nasabah.current_saldo
+				%td= nasabah.no_identitas
+				%td= nasabah.jenis_kelamin
+				%td Jenis Produk
+				%td Actor
+				%td Approved
+				%td Acomplish
+				%td
+					.btn-group
+						= link_to nasabah, :class => "btn btn-mini" do
+							%i.icon-search
+						= link_to edit_nasabah_path(nasabah), :class => "btn btn-mini" do
+							%i.icon-edit
+						= link_to nasabah, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-mini" do
+							%i.icon-remove-sign
+			- i+=1
 
-  - @nasabahs.each do |nasabah|
-    %tr
-      %td= nasabah.nama_lengkap
-      %td= nasabah.tempat_lahir
-      %td= nasabah.tanggal_lahir
-      %td= nasabah.jenis_kelamin
-      %td= nasabah.kewarganegaraan
-      %td= nasabah.no_identitas
-      %td= nasabah.jenis_identitas
-      %td= nasabah.expire_identitas
-      %td= nasabah.no_npwp
-      %td= nasabah.alamat_rumah
-      %td= nasabah.alamat_surat
-      %td= nasabah.no_tlp_kantor
-      %td= nasabah.no_ponsel
-      %td= nasabah.no_faximile
-      %td= nasabah.email
-      %td= nasabah.rekening_koran
-      %td= nasabah.status_pernikahan
-      %td= nasabah.status_rumah_tinggal
-      %td= nasabah.no_tlp_rumah
-      %td= nasabah.pekerjaan
-      %td= nasabah.bidang_usaha
-      %td= nasabah.jenis_rekening
-      %td= nasabah.tujuan_penggunaan_rekening
-      %td= nasabah.tujuan_penggunaan_dana
-      %td= nasabah.storan_awal
-      %td= nasabah.nama_lengkap_ibu_kandung
-      %td= nasabah.agama
-      %td= nasabah.current_saldo
-      %td= nasabah.approved
-      %td= nasabah.approved_at
-      %td= nasabah.actor_id
-      %td= link_to 'Show', nasabah
-      %td= link_to 'Edit', edit_nasabah_path(nasabah)
-      %td= link_to 'Destroy', nasabah, :method => :delete, :data => { :confirm => 'Are you sure?' }
+%hr
+.row-fluid
+	.span6
+		= link_to new_nasabah_path, :class => "btn btn-primary" do
+			%i.icon-pencil
+			New Nasabah
+	.span6
+		/ = will_paginate @users
 
-%br
-
-= link_to 'New Nasabah', new_nasabah_path

@@ -12,5 +12,6 @@
  *= require bootstrap
  *= require font-awesome
  *= require jquery.ui.all
- *= require applications/custom
+ *= require devise/custom
+ *= require devise/keyframes
  */

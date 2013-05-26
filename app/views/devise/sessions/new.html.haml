@@ -1,16 +1,20 @@
-%h2 Sign in
-= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, :autofocus => true
-  %div
-    = f.label :password
-    %br/
-    = f.password_field :password
-  - if devise_mapping.rememberable?
-    %div
-      = f.check_box :remember_me
-      = f.label :remember_me
-  %div= f.submit "Sign in"
-= render "devise/shared/links"
+= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-signin"}) do |f|
+	= image_tag "logo-brand.jpg"
+	%hr
+	%h3.title Please sign in!
+	%hr
+	= render 'layouts/shared/alert'
+	.form-field
+		= f.text_field :login, :autofocus => true, :class => "input-block-level", :placeholder => "Please Input email or nik"
+		= f.password_field :password,:autofocus => true, :class => "input-block-level", :placeholder => "Your password here"
+		%hr
+		%button.btn.btn-primary.btn-large
+			%i.icon-signin
+			Sign in
+- content_for :bottom_js do
+	:javascript
+		$(document).ready(function(){
+			$(".gradient-bg").transition({opacity:1},5000, function(){
+				$('.form-signin').transition({opacity:1, "margin-top": '100px'}, 1000);
+			});
+		});

@@ -1,103 +1,177 @@
-= form_for @nasabah do |f|
-  - if @nasabah.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@nasabah.errors.count, "error")} prohibited this nasabah from being saved:"
-      %ul
-        - @nasabah.errors.full_messages.each do |msg|
-          %li= msg
 
-  .field
-    = f.label :nama_lengkap
-    = f.text_field :nama_lengkap
-  .field
-    = f.label :tempat_lahir
-    = f.text_field :tempat_lahir
-  .field
-    = f.label :tanggal_lahir
-    = f.date_select :tanggal_lahir
-  .field
-    = f.label :jenis_kelamin
-    = f.text_field :jenis_kelamin
-  .field
-    = f.label :kewarganegaraan
-    = f.text_field :kewarganegaraan
-  .field
-    = f.label :no_identitas
-    = f.text_field :no_identitas
-  .field
-    = f.label :jenis_identitas
-    = f.text_field :jenis_identitas
-  .field
-    = f.label :expire_identitas
-    = f.date_select :expire_identitas
-  .field
-    = f.label :no_npwp
-    = f.text_field :no_npwp
-  .field
-    = f.label :alamat_rumah
-    = f.text_area :alamat_rumah
-  .field
-    = f.label :alamat_surat
-    = f.text_area :alamat_surat
-  .field
-    = f.label :no_tlp_kantor
-    = f.text_field :no_tlp_kantor
-  .field
-    = f.label :no_ponsel
-    = f.text_field :no_ponsel
-  .field
-    = f.label :no_faximile
-    = f.text_field :no_faximile
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :rekening_koran
-    = f.check_box :rekening_koran
-  .field
-    = f.label :status_pernikahan
-    = f.text_field :status_pernikahan
-  .field
-    = f.label :status_rumah_tinggal
-    = f.text_field :status_rumah_tinggal
-  .field
-    = f.label :no_tlp_rumah
-    = f.text_field :no_tlp_rumah
-  .field
-    = f.label :pekerjaan
-    = f.text_field :pekerjaan
-  .field
-    = f.label :bidang_usaha
-    = f.text_field :bidang_usaha
-  .field
-    = f.label :jenis_rekening
-    = f.text_field :jenis_rekening
-  .field
-    = f.label :tujuan_penggunaan_rekening
-    = f.text_field :tujuan_penggunaan_rekening
-  .field
-    = f.label :tujuan_penggunaan_dana
-    = f.text_field :tujuan_penggunaan_dana
-  .field
-    = f.label :storan_awal
-    = f.text_field :storan_awal
-  .field
-    = f.label :nama_lengkap_ibu_kandung
-    = f.text_field :nama_lengkap_ibu_kandung
-  .field
-    = f.label :agama
-    = f.text_field :agama
-  .field
-    = f.label :current_saldo
-    = f.text_field :current_saldo
-  .field
-    = f.label :approved
-    = f.check_box :approved
-  .field
-    = f.label :approved_at
-    = f.date_select :approved_at
-  .field
-    = f.label :actor_id
-    = f.number_field :actor_id
-  .actions
-    = f.submit 'Save'
+= form_for @nasabah,:html => {:class => "form-horizontal"} do |f|
+	= render 'layouts/shared/alert_object', :object => f.object
+	.row-fluid
+		.span8
+			.control-group
+				=f.label :jenis_product, :class => "control-label"
+				.controls
+	%hr
+	%h4 Data Pribadi
+	%hr
+	.row-fluid
+		.span8
+			.control-group
+				= f.label :nama_lengkap, :class => "control-label"
+				.controls
+					= f.text_field :nama_lengkap, :class => "input-block-level"
+			.control-group
+				= f.label :email, :class => "control-label"
+				.controls
+					= f.email_field :email, :class => "input-block-level"
+			.control-group
+				= f.label :no_ponsel, :class => "control-label"
+				.controls
+					= f.text_field :no_ponsel, :class => "input-block-level"
+			.control-group
+				= f.label :no_tlp_rumah, :class => "control-label"
+				.controls
+					= f.text_field :no_tlp_rumah, :class => "input-block-level"
+			.control-group
+				= f.label :tempat_lahir, :class => "control-label"
+				.controls
+					= f.text_field :tempat_lahir, :class => "input-block-level"		
+			.control-group
+				= f.label :tanggal_lahir, :class => "control-label"
+				.controls
+					= f.text_field :tanggal_lahir, :class => "input-block-level"
+			.control-group
+				= f.label :agama, :class => "control-label"
+				.controls
+					= f.text_field :agama, :class => "input-block-level"
+			.control-group
+				= f.label :status_pernikahan, :class => "control-label"
+				.controls
+					.form-inline
+						- Nasabah::STATUS_PERNIKAHAN.each do |pernikahan|
+							= f.label :status_pernikahan, :class => "radio", :style => "margin-right: 10px;" do
+								= f.radio_button :status_pernikahan, "#{pernikahan}"
+								= pernikahan
+			.control-group
+				= f.label :jenis_kelamin, :class => "control-label"
+				.controls
+					.form-inline
+						- Nasabah::SEX.each do |sex|
+							= f.label :jenis_kelamin, :class => "radio", :style => "margin-right: 10px;" do
+								= f.radio_button :jenis_kelamin, "#{sex}"
+								= sex
+			.control-group
+				= f.label :kewarganegaraan, :class => "control-label"
+				.controls
+					= f.text_field :kewarganegaraan, :class => "input-block-level"
+			.control-group
+				= f.label :jenis_identitas, :class => "control-label"
+				.controls
+					.form-inline
+						- Nasabah::JENIS_IDENTITAS.each do |id_type|
+							= f.label :jenis_identitas, :class => "radio", :style => "margin-right: 10px;" do
+								= f.radio_button :jenis_kelamin, "#{id_type}"
+								= id_type
+			.control-group
+				= f.label :no_identitas, :class => "control-label"
+				.controls
+					= f.text_field :no_identitas, :class => "input-block-level"
+			
+			.control-group
+				= f.label :expire_identitas, :class => "control-label"
+				.controls
+					= f.text_field :expire_identitas, :class => "input-block-level"
+			.control-group
+				= f.label :alamat_rumah, :class => "control-label"
+				.controls
+					= f.text_area :alamat_rumah, :class => "input-block-level", :rows=> "4"
+	
+			.control-group
+				= f.label :alamat_surat, :class => "control-label"
+				.controls
+					= f.text_area :alamat_surat, :class => "input-block-level", :rows=> "4"
+			.control-group
+				= f.label :status_rumah_tinggal, :class => "control-label"
+				.controls
+					= f.text_field :status_rumah_tinggal, :class => "input-block-level"
+	%hr
+	%h4 Data Pekerjaan
+	%hr
+	.row-fluid
+		.span8
+			.control-group
+				= f.label :no_npwp, :class => "control-label"
+				.controls
+					= f.text_field :no_npwp, :class => "input-block-level"
+			.control-group
+				= f.label :no_tlp_kantor, :class => "control-label"
+				.controls
+					= f.text_field :no_tlp_kantor, :class => "input-block-level"
+			.control-group
+				= f.label :no_faximile, :class => "control-label"
+				.controls
+					= f.text_field :no_faximile, :class => "input-block-level"
+			.control-group
+				= f.label :pekerjaan, :class => "control-label"
+				.controls
+					= f.text_field :pekerjaan, :class => "input-block-level"
+			.control-group
+				= f.label :bidang_usaha, :class => "control-label"
+				.controls
+					= f.text_field :bidang_usaha, :class => "input-block-level"
+	%hr
+	%h4 Data Pelengkap
+	%hr
+	.row-fluid
+		.span8
+			.control-group
+				= f.label :sumber_dana, :class => "control-label"
+				.controls
+					= f.text_field :sumber_dana, :class => "input-block-level"
+			.control-group
+				= f.label :tujuan_penggunaan_dana, :class => "control-label"
+				.controls
+					= f.text_field :tujuan_penggunaan_dana, :class => "input-block-level"
+			.control-group
+				= f.label :tujuan_penggunaan_rekening, :class => "control-label"
+				.controls
+					= f.text_field :tujuan_penggunaan_rekening, :class => "input-block-level"
+			.control-group
+				= f.label :tujuan_penggunaan_rekening, :class => "control-label"
+				.controls
+					= f.text_field :tujuan_penggunaan_rekening, :class => "input-block-level"
+			.control-group
+				= f.label :nama_lengkap_ibu_kandung, :class => "control-label"
+				.controls
+					= f.text_field :nama_lengkap_ibu_kandung, :class => "input-block-level"
+	.form-actions
+		= link_to nasabahs_path, :class => "btn btn-large" do
+			%i.icon-arrow-left
+			Back
+		%button.btn.btn-primary.btn-large
+			%i.icon-pencil
+			= @nasabah.new_record? ? "Save" : "Update"
+	/ .field
+	/ = f.label :biaya_administrasi
+	/ = f.text_field :biaya_administrasi
+	/ 
+	/ 
+	/ .field
+	/ = f.label :current_saldo
+	/ = f.text_field :current_saldo
+	/ .field
+	/ = f.label :approved
+	/ = f.check_box :approved
+	/ .field
+	/ = f.label :accomplished
+	/ = f.check_box :accomplished
+	/ .field
+	/ = f.label :approved_at
+	/ = f.date_select :approved_at
+	/ .field
+	/ = f.label :actor_id
+	/ = f.number_field :actor_id
+	/ .field
+	/ = f.label :key_storage_id
+	/ = f.number_field :key_storage_id
+	/ .field
+	/ = f.label :is_archive
+	/ = f.check_box :is_archive
+	/ .field
+	/ = f.label :rekening_koran
+	/ = f.check_box :rekening_koran

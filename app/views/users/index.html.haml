@@ -1,0 +1,41 @@
+.row-fluid
+	.span6
+		%h3 Data Users
+	.span6		
+%hr
+%table.table.table-bordered.table-hover
+	%thead
+		%tr
+			%th #
+			%th Nik
+			%th Nama Lengkap
+			%th Email
+			%th Role
+			%th Action
+	%tbody
+		- i = 1
+		- @users.each do |user|
+			
+			%tr
+				%td= i
+				%td= user.nik
+				%td= user.nama_lengkap
+				%td= user.email
+				%td= user.role
+				%td
+					.btn-group
+						=link_to user, :class => "btn btn-mini" do
+							%i.icon-search
+						=link_to edit_user_path(user), :class => "btn btn-mini" do
+							%i.icon-edit
+						=link_to user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-mini" do
+							%i.icon-remove-sign
+			- i+=1
+%hr
+.row-fluid
+	.span6
+		= link_to new_user_path, :class => "btn btn-primary" do
+			%i.icon-pencil
+			New User
+	.span6
+		= will_paginate @users

@@ -1,0 +1,17 @@
+!!!
+%html
+	%head
+		%title Devise
+		= stylesheet_link_tag    "devise", :media => "all"
+		
+		= csrf_meta_tags
+	%body
+		#background
+			= image_tag "background.jpg"
+		.gradient-bg
+		.container
+			= yield
+		#script
+			= javascript_include_tag "application"
+			= yield :bottom_js
+			

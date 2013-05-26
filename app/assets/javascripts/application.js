@@ -11,5 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.transit.min
 //= require jquery_ujs
+//= require jquery.ui.all
+//= require bootstrap
 //= require_tree .

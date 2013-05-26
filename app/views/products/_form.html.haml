@@ -1,0 +1,53 @@
+= form_for @product,:html => {:class => "form-horizontal"} do |f|
+	= render 'layouts/shared/alert_object', :object => f.object
+	.row-fluid
+		.span8
+			.control-group
+				= f.label :name, :class => "control-label"
+				.controls
+					= f.text_field :name, :class => "input-block-level"
+			.control-group
+				= f.label :description, :class => "control-label"
+				.controls
+					= f.text_area :description, :class => "input-block-level", :rows => "3"
+			.control-group
+				= f.label :value, :class => "control-label"
+				.controls
+					= f.number_field :value, :class => "input-block-level"
+			.control-group
+				= f.label :month_period, :class => "control-label"
+				.controls
+					= f.number_field :month_period, :class => "input-block-level"
+			.control-group
+				= f.label :month_credit, :class => "control-label"
+				.controls
+					.input-append
+						= f.text_field :month_credit, :class => "input-block-level"
+						%span#count.add-on
+							Count for me!
+						
+			.control-group
+				= f.label :first_credit, :class => "control-label"
+				.controls
+					= f.number_field :first_credit, :class => "input-block-level"
+			.control-group
+				= f.label :code, :class => "control-label"
+				.controls
+					= f.text_field :code, :class => "input-block-level"
+	.form-actions
+		=link_to products_path, :class => "btn" do
+			%i.icon-arrow-left
+			Back			
+		%button.btn.btn-primary
+			%i.icon-pencil
+			= @product.new_record? ? "Save" : "Update"
+= content_for :bottom_js do
+	:javascript
+		$("#count").click(function(){
+			var value = document.getElementById("product_value").value;
+			var month = document.getElementById("product_month_period").value;
+			var month_credit = value/month;
+			$("#product_month_credit").val(month_credit);
+			$("#product_first_credit").val(month_credit);
+		});
+		
