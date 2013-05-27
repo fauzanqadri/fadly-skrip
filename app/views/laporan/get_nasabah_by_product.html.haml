@@ -1,0 +1,82 @@
+.row-fluid
+	.span6
+		%h3 
+			%i.icon-group
+			Laporan Nasabah
+	.span4
+		= form_for :scope, :url => laporan_get_nasabah_by_product_path, :method => "post", :html => {:class => "form-inline print-action"} do |f|
+			= f.label :nasabah_by_product
+			= f.select :product, options_for_select(Product.all_collection), :class => "hide-pliss"
+			%button.btn
+				%i.icon-search
+					
+	.span2
+		.print-action.hide-plis.pull-right.form-inline
+			= link_to "#", :class => "btn btn-primary",:onclick=> "window.print()" do
+				%i.icon-print
+				Print
+		.row-fluid
+			.span5
+				
+				
+%hr
+
+%table.table.table-bordered
+	%thead
+		%tr
+			%th
+				.center-text #
+			%th 
+				.center-text No Rekening
+			%th
+				.center-text Nama lengkap
+			%th 
+				.center-text Jenis Kelamin
+			%th 
+				.center-text Product
+			%th
+				.center-text Saldo
+			%th 
+				.center-text Approved
+			%th 
+				.center-text Acomplish
+	%tbody
+		- i = 1
+		- @nasabahs.each do |nasabah|
+			%tr
+				%td
+					.center-text= i
+				%td
+					.center-text= nasabah.no_rekening
+				%td
+					.center-text= nasabah.nama_lengkap
+				%td
+					.center-text= nasabah.jenis_kelamin
+				%td
+					.center-text= nasabah.product.name
+				%td
+					.center-text= nasabah.current_saldo.nil? || nasabah.current_saldo.blank? ? "0" : nasabah.current_saldo
+				%td
+					.center-text
+						-if nasabah.approved
+							%span.label.label-info
+								%i.icon.icon-ok.icon-white
+								Disetujui
+						-elsif nasabah.approved == false
+							%span.btn.btn-danger.btn-mini.disabled
+								%i.icon.icon-close.icon-white
+								Ditolak
+						-else
+							%span.label.label-inverse
+								%i.icon.icon-minus.icon-white
+								Belum
+					
+				%td 
+					.center-text
+						-if nasabah.accomplished?
+							%i.icon.icon-ok
+						-else
+							%i.icon.icon-remove
+			- i+=1
+
+%hr

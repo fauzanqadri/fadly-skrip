@@ -1,9 +1,38 @@
 !!!
 %html
-  %head
-    %title FadlySkrip
-    = stylesheet_link_tag    "application", :media => "all"
-    = javascript_include_tag "application"
-    = csrf_meta_tags
-  %body
-    = yield
+	%head
+		%title FadlySkrip
+		= stylesheet_link_tag "application", :media => "all"
+		= stylesheet_link_tag "print", :media => "print"
+		= csrf_meta_tags
+	%body
+		#background
+			= image_tag "background.jpg", :class => "hide-plis"
+		.gradient-bg
+		= render 'layouts/shared/header'
+		.container
+			.inner
+				.row-fluid
+					.span6
+						= image_tag "logo-brand.jpg"
+					.span6
+						%p.pull-right.hide-plis
+							Sign in as :
+							%span.label.label-success= current_user.role
+				%hr
+				=render 'layouts/shared/alert'
+				= yield
+			%footer.hide-plis
+				%small
+					&copy 2013 Bank Syariah AT-TAQWA Design by
+					= link_to "@fauzanqadri", "https://www.twitter.com/fauzanqadri"
+		#script
+			= javascript_include_tag "application"
+			:javascript
+				$('.datepicker').datepicker({
+					dateFormat: 'yy-mm-dd',
+					changeMonth: true, 
+					changeYear: true,
+					yearRange: '1945:2040'
+				});
+			= yield :bottom_js

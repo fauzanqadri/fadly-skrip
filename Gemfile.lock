@@ -39,6 +39,7 @@ GEM
       sass (~> 3.2)
     builder (3.0.4)
     cancan (1.6.10)
+    chronic (0.9.1)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -151,6 +152,7 @@ DEPENDENCIES
   better_errors
   bootstrap-sass
   cancan
+  chronic
   coffee-rails (~> 3.2.1)
   devise
   font-awesome-rails

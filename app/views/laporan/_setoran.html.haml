@@ -1,0 +1,89 @@
+.row-fluid
+	.span4
+		%h3
+			%i.icon-exchange
+			Laporan Setoran
+	.span8
+		.print-action.hide-plis.pull-right
+			.btn-group
+				=link_to laporan_setoran_url(:scope => ''), :class => "btn" do
+					All
+				=link_to laporan_setoran_url(:scope => 'today'), :class => "btn" do
+					Harian
+				=link_to laporan_setoran_url(:scope => 'last week'), :class => "btn" do
+					Mingguan
+				=link_to laporan_setoran_url(:scope => 'last month'), :class => "btn" do
+					Bulanan
+				=link_to laporan_setoran_url(:scope => 'last year'), :class => "btn" do
+					Tahunan
+			= link_to "#filterModal", :class => "btn", :role => "button", "data-toggle" => "modal" do
+				%i.icon-filter
+				Filter
+			#filterModal.modal.hide.fade{"tabindex" => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+				= form_for :scope, :url => laporan_get_by_range_path, :method => "post", :html => {:id => "filter"} do |f|
+					.modal-header
+						%button.close{"data-dismiss" => "modal", "aria-hidden" => "true"} x
+						%h3.myModalLabel Filter
+					.modal-body
+						= f.text_field :date_form, :class => "input-block-level datepicker", :placeholder => "Mulai tanggal"
+						= f.text_field :date_to, :class => "input-block-level datepicker", :placeholder => "Sampai tanggal"
+					.modal-footer
+						%button.btn.btn-primary
+							%i.icon-filter
+							Filter
+					
+			= link_to "#", :class => "btn btn-primary",:onclick=> "window.print()" do
+				%i.icon-print
+				Print
+			
+	
+%hr
+.row-fluid
+	.span6
+		-if	!@setorans.blank? || @setorans.nil?
+			%h5
+				Data Mulai :
+				= @setorans.first.created_at
+				%br
+				%br
+				Data Sampai :
+				= @setorans.last.created_at
+	.span6
+		-if	!@setorans.blank? || @setorans.nil?
+			%h5.pull-right
+				Credit : IDR.
+				- credit = 0
+				- debit = 0
+				- @setorans.each do |setoran|
+					- credit += setoran.credit
+					- debit += setoran.debit unless setoran.debit.blank? || setoran.debit.nil?
+				
+				= credit
+				%br
+				%br
+				Debit : IDR.
+				= debit
+%hr
+%table.table.table-bordered
+	%thead
+		%tr
+			%th #
+			%th Nasabah
+			%th Teller
+			%th Amount
+			%th Credit
+			%th Debit
+			%th Keterangan
+	%tody
+		- i = 1
+		- @setorans.each do |setoran|
+			%tr
+				%td= i
+				%td= setoran.nasabah.nama_lengkap
+				%td= setoran.actor.nama_lengkap
+				%td= setoran.amount
+				%td= setoran.credit
+				%td= setoran.debit
+				%td= setoran.keterangan
+			- i+=1
+%hr

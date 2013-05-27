@@ -11,6 +11,11 @@ class Product < ActiveRecord::Base
   has_many :out_version, :class_name => "Product", :foreign_key => "code", :primary_key => "code"
   before_create :set_default_version
   
+  def self.all_collection
+    self.all.map do |p|
+      ["#{p.name} V.#{p.version}", p.id]
+    end
+  end
   def clone_attr_for_upgrade
     as_json(only: [:name, :code, :description, :version])
   end

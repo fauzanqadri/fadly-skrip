@@ -10,6 +10,14 @@ class Setoran < ActiveRecord::Base
   before_create :set_debit_credit
   before_create :set_saldo
   
+  def self.get_by_time times
+    self.where(:created_at => ("#{Chronic.parse(times)}".to_time)..(Chronic.parse("today")))
+  end
+  
+  def self.get_by_range params
+    self.where(:created_at => ("#{params[:date_form]} 00:00:00.000000".to_time)..("#{params[:date_to]} 00:00:00.000000".to_time))
+  end
+  
   def self.build_setoran params
     puts params
     product = Nasabah.find(params["nasabah_id"]).product

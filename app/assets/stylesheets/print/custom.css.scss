@@ -1,0 +1,59 @@
+html,body{
+	background: white;
+}
+.hide-plis {
+	display: none;
+}
+.inner {
+	padding-top: 0px;
+}
+
+table {
+	max-width: 100%;
+	width: 100%;
+	background-color: transparent;
+	border: 1px solid #000000;
+	border-collapse: collapse;
+	border-spacing: 0;
+	text-align: center;
+	thead,tbody, thead tr, thead tr td, thead tr th, tbody tr, tbody tr td, tbody tr td:nth-child(1), thead tr td:nth-child(1), thead tr th:nth-child(1) {
+		border: 1px solid #000000;
+		border-collapse: collapse;
+		border-left: 1px solid #000000;
+		text-align: center;
+	}
+}
+.table-bordered {
+	border: 1px solid #000000;
+	border-left: 1px solid #000000;
+	border-collapse: collapse;
+}
+hr {
+	margin: 10px 0;
+	border: 0;
+	border-top: 1px solid black;
+}
+//header{
+//	max-height:400px;
+//	margin-bottom:10px;
+//}
+//header img {
+//	margin:0;
+//	position:absolute;
+//	padding-top: 20px;
+//}
+//header .cop-title {
+//	width: 860px;
+//	margin:0 auto;
+//	position:relative;
+//}
+//header .cop-title h3 {
+//	width: 300px;
+//	text-align: center;
+//	margin:0 auto;
+//}
+//header .cop-title p {
+//	width: 300px;
+//	text-align: center;
+//	margin:0 auto;
+//}

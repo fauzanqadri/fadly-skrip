@@ -11,6 +11,7 @@ gem "cancan"
 gem 'devise'
 gem "paperclip", "~> 3.0"
 gem 'will_paginate', '~> 3.0'
+gem 'chronic'
 
 group :production do
 	gem 'pg'
