@@ -1,0 +1,68 @@
+.row-fluid
+	= form_for @setoran, :html => {:class => "form-horizontal span8"}  do |f|
+		= render 'layouts/shared/alert_object', :object => f.object
+		.control-group
+			= f.label :nasabah_id, :class => "control-label"
+			.controls
+				%input{:type => 'text', :class => "input-block-level",:id => "nasabah-autocomplete", :value  => (@setoran.new_record? == false ? @setoran.nasabah.nama_lengkap : '')}
+				= f.hidden_field :nasabah_id
+		.control-group
+			= f.label :amount, :class => "control-label"
+			.controls
+				= f.number_field :amount, :class => "input-block-level"
+		.control-group
+			= f.label :tipe_setoran, :class => "control-label"
+			.controls
+				.form-inline
+					- Setoran::JENIS_SETORAN.each do |tipe|
+						= f.label :tipe_setoran, :class => "radio", :style => "margin-right: 10px;" do
+							= f.radio_button :tipe_setoran, "#{tipe}"
+							= tipe
+		.control-group
+			= f.label :keterangan, :class => "control-label"
+			.controls
+				= f.text_field :keterangan, :class => "input-block-level"
+		.form-actions
+			= link_to setorans_path, :class => "btn btn-large" do
+				%i.icon-arrow-left
+				Back
+			%button.btn.btn-primary.btn-large
+				%i.icon-pencil
+				= @setoran.new_record? ? "Save" : "Update"
+= content_for :bottom_js do
+	:javascript 
+		$(document).ready(function(){
+			$('#nasabah-autocomplete').autocomplete({
+				source: function(request, response){
+					$.ajax({
+						url : "#{get_user_path}",
+						dataType : 'json',
+						data : {
+							query : $('#nasabah-autocomplete').val(),
+						},
+						success : function(data){
+							response( $.map( data, function( item ) {
+										return {
+											label: item.nama_lengkap,
+											value: item.id
+										}
+									}
+								)
+							);
+						}
+					})
+				},
+				minLength: 2,
+				focus: function( event, ui ) {
+					$('#nasabah-autocomplete').val( ui.item.label )
+					return false;
+				},
+				select: function( event, ui ) {
+					$('#nasabah-autocomplete').val( ui.item.label )
+					$('#setoran_nasabah_id').val( ui.item.value)
+					return false
+				},
+				
+			})
+		})
+	

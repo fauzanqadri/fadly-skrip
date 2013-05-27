@@ -1,44 +1,77 @@
 .row-fluid
 	.span6
-		%h3 Data Nasabah
+		%h3 
+			%i.icon-group
+			Data Nasabah
 	.span6		
 %hr
 
 %table.table.table-bordered
 	%thead
 		%tr
-			%th #
-			%th No Rekening
-			%th Nama lengkap
-			%th Saldo
-			%th No Identitas
-			%th Jenis Kelamin
-			%th Jenis Product
-			%th Actor
-			%th Approved
-			%th Acomplish
-			%th Action
+			%th
+				.center-text #
+			%th 
+				.center-text No Rekening
+			%th
+				.center-text Nama lengkap
+			%th 
+				.center-text Jenis Kelamin
+			%th 
+				.center-text Product
+			%th
+				.center-text Saldo
+			%th 
+				.center-text Approved
+			%th 
+				.center-text Acomplish
+			%th 
+				.center-text Action
 	%tbody
 		- i = 1
 		- @nasabahs.each do |nasabah|
 			%tr
-				%td= i
-				%td No Rekening
-				%td= nasabah.nama_lengkap
-				%td= nasabah.current_saldo
-				%td= nasabah.no_identitas
-				%td= nasabah.jenis_kelamin
-				%td Jenis Produk
-				%td Actor
-				%td Approved
-				%td Acomplish
+				%td
+					.center-text= i
+				%td
+					.center-text= nasabah.no_rekening
+				%td
+					.center-text= nasabah.nama_lengkap
+				%td
+					.center-text= nasabah.jenis_kelamin
+				%td
+					.center-text= nasabah.product.name
+				%td
+					.center-text= nasabah.current_saldo.nil? || nasabah.current_saldo.blank? ? "0" : nasabah.current_saldo
+				%td
+					.center-text
+						-if nasabah.approved
+							%span.btn.btn-info.btn-mini.disabled
+								%i.icon.icon-ok.icon-white
+								Disetujui
+						-elsif nasabah.approved == false
+							%span.btn.btn-danger.btn-mini.disabled
+								%i.icon.icon-close.icon-white
+								Ditolak
+						-else
+							%span.btn.btn-inverse.btn-mini.disabled
+								%i.icon.icon-ok.icon-white
+								Belum
+					
+				%td 
+					.center-text
+						-if nasabah.accomplished?
+							%i.icon.icon-ok
+						-else
+							%i.icon.icon-remove
+					
 				%td
 					.btn-group
-						= link_to nasabah, :class => "btn btn-mini" do
+						= link_to nasabah, :class => "btn btn-mini btn-info" do
 							%i.icon-search
-						= link_to edit_nasabah_path(nasabah), :class => "btn btn-mini" do
+						= link_to edit_nasabah_path(nasabah), :class => "btn btn-mini btn-primary" do
 							%i.icon-edit
-						= link_to nasabah, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-mini" do
+						= link_to nasabah, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-mini btn-danger" do
 							%i.icon-remove-sign
 			- i+=1
 

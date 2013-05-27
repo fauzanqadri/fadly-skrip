@@ -24,7 +24,7 @@ class NasabahsController < ApplicationController
   # GET /nasabahs/new
   # GET /nasabahs/new.json
   def new
-    @nasabah = Nasabah.new
+    @nasabah = current_user.nasabahs.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -40,7 +40,7 @@ class NasabahsController < ApplicationController
   # POST /nasabahs
   # POST /nasabahs.json
   def create
-    @nasabah = Nasabah.new(params[:nasabah])
+    @nasabah = current_user.nasabahs.new(params[:nasabah])
 
     respond_to do |format|
       if @nasabah.save

@@ -1,5 +1,10 @@
 FadlySkrip::Application.routes.draw do
-  resources :products
+  resources :setorans
+  match "/get_user", to: "setorans#get_user"
+  resources :products do
+    get "/upgrade", :action => "upgrade"
+    post "/upgarde", :action => "do_upgrade"
+  end
 
 
   resources :nasabahs

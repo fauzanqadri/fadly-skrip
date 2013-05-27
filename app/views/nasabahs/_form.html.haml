@@ -6,6 +6,7 @@
 			.control-group
 				=f.label :jenis_product, :class => "control-label"
 				.controls
+					= f.select :product_id, options_for_select(@nasabah.jenis_product_collection), :html => {:class => "input-block-level"}
 	%hr
 	%h4 Data Pribadi
 	%hr
@@ -34,11 +35,15 @@
 			.control-group
 				= f.label :tanggal_lahir, :class => "control-label"
 				.controls
-					= f.text_field :tanggal_lahir, :class => "input-block-level"
+					= f.text_field :tanggal_lahir, :class => "input-block-level datepicker"
 			.control-group
 				= f.label :agama, :class => "control-label"
 				.controls
-					= f.text_field :agama, :class => "input-block-level"
+					.form-inline
+						- Nasabah::AGAMA.each do |agama|
+							= f.label :agama, :class => "radio", :style => "margin-right: 10px;" do
+								= f.radio_button :agama, "#{agama}"
+								= agama
 			.control-group
 				= f.label :status_pernikahan, :class => "control-label"
 				.controls
@@ -65,7 +70,7 @@
 					.form-inline
 						- Nasabah::JENIS_IDENTITAS.each do |id_type|
 							= f.label :jenis_identitas, :class => "radio", :style => "margin-right: 10px;" do
-								= f.radio_button :jenis_kelamin, "#{id_type}"
+								= f.radio_button :jenis_identitas, "#{id_type}"
 								= id_type
 			.control-group
 				= f.label :no_identitas, :class => "control-label"
@@ -75,7 +80,7 @@
 			.control-group
 				= f.label :expire_identitas, :class => "control-label"
 				.controls
-					= f.text_field :expire_identitas, :class => "input-block-level"
+					= f.text_field :expire_identitas, :class => "input-block-level datepicker"
 			.control-group
 				= f.label :alamat_rumah, :class => "control-label"
 				.controls
@@ -146,32 +151,3 @@
 		%button.btn.btn-primary.btn-large
 			%i.icon-pencil
 			= @nasabah.new_record? ? "Save" : "Update"
-	/ .field
-	/ = f.label :biaya_administrasi
-	/ = f.text_field :biaya_administrasi
-	/ 
-	/ 
-	/ .field
-	/ = f.label :current_saldo
-	/ = f.text_field :current_saldo
-	/ .field
-	/ = f.label :approved
-	/ = f.check_box :approved
-	/ .field
-	/ = f.label :accomplished
-	/ = f.check_box :accomplished
-	/ .field
-	/ = f.label :approved_at
-	/ = f.date_select :approved_at
-	/ .field
-	/ = f.label :actor_id
-	/ = f.number_field :actor_id
-	/ .field
-	/ = f.label :key_storage_id
-	/ = f.number_field :key_storage_id
-	/ .field
-	/ = f.label :is_archive
-	/ = f.check_box :is_archive
-	/ .field
-	/ = f.label :rekening_koran
-	/ = f.check_box :rekening_koran

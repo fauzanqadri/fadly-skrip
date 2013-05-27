@@ -1,20 +1,22 @@
 = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-signin"}) do |f|
 	= image_tag "logo-brand.jpg"
 	%hr
-	%h3.title Please sign in!
-	%hr
 	= render 'layouts/shared/alert'
 	.form-field
 		= f.text_field :login, :autofocus => true, :class => "input-block-level", :placeholder => "Please Input email or nik"
-		= f.password_field :password,:autofocus => true, :class => "input-block-level", :placeholder => "Your password here"
+		.row-fluid
+			.span8
+				= f.password_field :password,:autofocus => true, :class => "input-block-level", :placeholder => "Your password here"
+			.span4
+				%button.btn.btn-primary.input-block-level
+					%i.icon-signin
+					Sign in
 		%hr
-		%button.btn.btn-primary.btn-large
-			%i.icon-signin
-			Sign in
+		
 - content_for :bottom_js do
 	:javascript
 		$(document).ready(function(){
-			$(".gradient-bg").transition({opacity:1},5000, function(){
-				$('.form-signin').transition({opacity:1, "margin-top": '100px'}, 1000);
+			$(".gradient-bg").transition({opacity:1},2000, function(){
+				$('.form-signin').transition({opacity:1, "margin-top": '150px'}, 3000);
 			});
 		});

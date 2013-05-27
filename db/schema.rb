@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130525183055) do
+ActiveRecord::Schema.define(:version => 20130527105153) do
 
   create_table "nasabahs", :force => true do |t|
     t.string   "nama_lengkap"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20130525183055) do
     t.boolean  "accomplished"
     t.date     "approved_at"
     t.integer  "actor_id"
-    t.integer  "key_storage_id"
+    t.integer  "product_id"
     t.boolean  "is_archive"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
@@ -63,6 +63,20 @@ ActiveRecord::Schema.define(:version => 20130525183055) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "value"
+  end
+
+  create_table "setorans", :force => true do |t|
+    t.integer  "nasabah_id"
+    t.string   "actor_id"
+    t.integer  "amount"
+    t.integer  "term"
+    t.integer  "credit"
+    t.integer  "debit"
+    t.integer  "saldo"
+    t.string   "keterangan"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "tipe_setoran"
   end
 
   create_table "users", :force => true do |t|

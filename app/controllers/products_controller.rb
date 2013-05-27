@@ -1,9 +1,9 @@
 class ProductsController < ApplicationController
+  before_filter :clone_product, only: [:upgrade,:do_upgrade] 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
-
+    @products = Product.paginate(:page => params[:page]).order('created_at desc')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @products }
@@ -35,6 +35,10 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     @product = Product.find(params[:id])
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @product }
+    end
   end
 
   # POST /products
@@ -44,7 +48,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
+        format.html { redirect_to products_url, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
         format.html { render action: "new" }
@@ -60,7 +64,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.update_attributes(params[:product])
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -80,4 +84,32 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def upgrade
+    @product = Product.new(@product_cloned.clone_attr_for_upgrade)
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @product }
+    end
+  end
+  
+  def do_upgrade
+    @product = Product.new(@product_cloned.clone_attr_for_upgrade.merge params[:product])
+    respond_to do |format|
+      if @product.save
+        format.html { redirect_to products_url, notice: 'Product was successfully updated.' }
+        format.json { render json: @product, status: :created, location: @product }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  private
+  def clone_product
+    @product = Product.find(params[:product_id])
+    @product_cloned = @product
+  end
+    
 end

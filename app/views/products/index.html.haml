@@ -1,6 +1,8 @@
 .row-fluid
 	.span6
-		%h3 Products
+		%h3
+			%i.icon-barcode
+			Products
 	.span6		
 %hr
 
@@ -9,9 +11,10 @@
 		%tr
 			%th #
 			%th Name
-			%th Month period
+			%th Value
 			%th Month credit
 			%th First credit
+			%th Month period
 			%th Code
 			%th Version
 			%th Action
@@ -20,23 +23,31 @@
 		- @products.each do |product|
 			%tr
 				%td= i
-				%td= product.name				
-				%td= product.month_period
+				%td= product.name
+				%td= product.value				
 				%td= product.month_credit
 				%td= product.first_credit
+				%td= "#{product.month_period} (#{product.month_period/12} Year/s)"
 				%td= product.code
-				%td= product.version
+				%td= "V.#{product.version}"
 				%td
 					.btn-group
 						= link_to edit_product_path(product), :class => "btn btn-mini btn-primary" do
 							%i.icon-edit
 						= link_to product, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-mini btn-danger" do
 							%i.icon-trash
-						= link_to "#", :class => "btn btn-mini btn-info" do
+						= link_to product_upgrade_path(product), :class => "btn btn-mini btn-info" do
 							%i.icon-upload-alt
+			- i+=1
 
 %hr
+.row-fluid
+	.span6
+		= link_to new_product_path, :class => "btn btn-primary" do
+			%i.icon-pencil
+			New Product
+	.span6
+		.digg_pagination.pull-right
+			= will_paginate @products, :container => false
 
-= link_to new_product_path, :class => "btn btn-primary" do
-	%i.icon-pencil
-	New Product
+

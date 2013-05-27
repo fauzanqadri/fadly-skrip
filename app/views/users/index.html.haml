@@ -1,6 +1,8 @@
 .row-fluid
 	.span6
-		%h3 Data Users
+		%h3
+			%i.icon-user
+			Data Users
 	.span6		
 %hr
 %table.table.table-bordered.table-hover
@@ -24,11 +26,11 @@
 				%td= user.role
 				%td
 					.btn-group
-						=link_to user, :class => "btn btn-mini" do
+						=link_to user, :class => "btn btn-mini btn-info" do
 							%i.icon-search
-						=link_to edit_user_path(user), :class => "btn btn-mini" do
+						=link_to edit_user_path(user), :class => "btn btn-mini btn-primary" do
 							%i.icon-edit
-						=link_to user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-mini" do
+						=link_to user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-mini btn-danger" do
 							%i.icon-remove-sign
 			- i+=1
 %hr

@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :nama_lengkap, :role, :nik, :archives
+  has_many :nasabahs, :foreign_key => "actor_id"
+  has_many :setorans, :foreign_key => "actor_id"
   attr_accessor :login
   attr_accessor :login
   #before_create :archive_defaults

@@ -1,11 +1,11 @@
-= form_for @product,:html => {:class => "form-horizontal"} do |f|
+= form_for @product,:url => product_upgarde_path,:html => {:class => "form-horizontal"} do |f|
 	= render 'layouts/shared/alert_object', :object => f.object
 	.row-fluid
 		.span8
 			.control-group
 				= f.label :name, :class => "control-label"
 				.controls
-					= f.text_field :name, :class => "input-block-level"
+					= f.text_field :name, :class => "input-block-level", "disabled" => ""
 			.control-group
 				= f.label :description, :class => "control-label"
 				.controls
@@ -22,8 +22,8 @@
 				= f.label :month_credit, :class => "control-label"
 				.controls
 					.input-append
-						= f.text_field :month_credit, :class => "input-block-level"
-						%span#count.add-on
+						= f.text_field :month_credit
+						%a#count.btn.btn-info{:href => "#"}
 							Count for me!
 						
 			.control-group
@@ -33,7 +33,7 @@
 			.control-group
 				= f.label :code, :class => "control-label"
 				.controls
-					= f.text_field :code, :class => "input-block-level"
+					= f.text_field :code, :class => "input-block-level", "disabled" => ""
 	.form-actions
 		=link_to products_path, :class => "btn" do
 			%i.icon-arrow-left

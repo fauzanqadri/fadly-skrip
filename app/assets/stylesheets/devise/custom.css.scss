@@ -58,10 +58,7 @@ html,body{
 	}
 	input {
 		&[type="text"], &[type="password"], &[type="email"]{
-			font-size: 18px;
-			height: auto;
-			margin-bottom: 15px;
-			padding: 7px 9px;
+			padding: 5px 9px;
 		}
 	}
 }

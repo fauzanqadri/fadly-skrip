@@ -1,7 +1,8 @@
 %header.navbar.navbar-fixed-top
 	.navbar-inner
-		.container
-			= link_to "AT-TAQWA", root_path, :class => "brand"
+		.container	
+			= link_to root_path, :class => "brand" do
+				Bank Syariah AT-TAQWA
 			%ul.nav
 				/ - if can?(:manage, Nasabah)
 				%li
@@ -9,7 +10,7 @@
 						%i.icon-group
 						Nasabah
 				%li
-					= link_to "#" do
+					= link_to setorans_path do
 						%i.icon-exchange
 						Setoran
 				%li.dropdown
@@ -32,7 +33,7 @@
 						User
 				%li
 					= link_to products_path do
-						%i.icon-key
+						%i.icon-barcode
 						Products
 			%ul.nav.pull-right
 				%li.dropdown

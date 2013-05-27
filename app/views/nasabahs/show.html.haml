@@ -1,108 +1,178 @@
-%p#notice= notice
+.row-fluid
+	.span6
+		%h3 
+			%i.icon-group
+			Data Nasabah
+			= @nasabah.nama_lengkap
+	.span6
+/ %table.table
+/ 	-JSON.parse(@nasabah.to_json).each do |k,v|
+/ 		%tr
+/ 			%td
+/ 				.center-text
+/ 					%b= k.titleize
+/ 			%td
+/ 				.center-text= v
+%table.table
+	%tr
+		%td{:colspan => 2}
+			%h3 Data Pribadi
+	%tr
+		%td 
+			%b Nama lengkap
+		%td= @nasabah.nama_lengkap
+	%tr
+		%td
+			%b Email
+		%td= @nasabah.email
+	%tr
+		%td
+			%b No tlp rumah
+		%td= @nasabah.no_tlp_rumah
+	%tr
+		%td
+			%b No ponsel
+		%td= @nasabah.no_ponsel
+	%tr
+		%td
+			%b Tempat lahir
+		%td= @nasabah.tempat_lahir
+	%tr
+		%td
+			%b Tanggal lahir
+		%td= @nasabah.tanggal_lahir
+	%tr
+		%td
+			%b Jenis kelamin
+		%td= @nasabah.jenis_kelamin
+	%tr
+		%td
+			%b Status pernikahan
+		%td= @nasabah.status_pernikahan
+	%tr
+		%td
+			%b Agama
+		%td= @nasabah.agama
+	%tr
+		%td
+			%b Alamat rumah
+		%td= @nasabah.alamat_rumah
+	%tr
+		%td
+			%b Alamat surat
+		%td= @nasabah.alamat_surat
 
-%p
-  %b Nama lengkap:
-  = @nasabah.nama_lengkap
-%p
-  %b Tempat lahir:
-  = @nasabah.tempat_lahir
-%p
-  %b Tanggal lahir:
-  = @nasabah.tanggal_lahir
-%p
-  %b Jenis kelamin:
-  = @nasabah.jenis_kelamin
-%p
-  %b Kewarganegaraan:
-  = @nasabah.kewarganegaraan
-%p
-  %b No identitas:
-  = @nasabah.no_identitas
-%p
-  %b Jenis identitas:
-  = @nasabah.jenis_identitas
-%p
-  %b Expire identitas:
-  = @nasabah.expire_identitas
-%p
-  %b No npwp:
-  = @nasabah.no_npwp
-%p
-  %b Alamat rumah:
-  = @nasabah.alamat_rumah
-%p
-  %b Alamat surat:
-  = @nasabah.alamat_surat
-%p
-  %b No tlp kantor:
-  = @nasabah.no_tlp_kantor
-%p
-  %b No ponsel:
-  = @nasabah.no_ponsel
-%p
-  %b No faximile:
-  = @nasabah.no_faximile
-%p
-  %b Email:
-  = @nasabah.email
-%p
-  %b Rekening koran:
-  = @nasabah.rekening_koran
-%p
-  %b Status pernikahan:
-  = @nasabah.status_pernikahan
-%p
-  %b Status rumah tinggal:
-  = @nasabah.status_rumah_tinggal
-%p
-  %b No tlp rumah:
-  = @nasabah.no_tlp_rumah
-%p
-  %b Pekerjaan:
-  = @nasabah.pekerjaan
-%p
-  %b Bidang usaha:
-  = @nasabah.bidang_usaha
-%p
-  %b Sumber dana:
-  = @nasabah.sumber_dana
-%p
-  %b Tujuan penggunaan rekening:
-  = @nasabah.tujuan_penggunaan_rekening
-%p
-  %b Tujuan penggunaan dana:
-  = @nasabah.tujuan_penggunaan_dana
-%p
-  %b Biaya administrasi:
-  = @nasabah.biaya_administrasi
-%p
-  %b Nama lengkap ibu kandung:
-  = @nasabah.nama_lengkap_ibu_kandung
-%p
-  %b Agama:
-  = @nasabah.agama
-%p
-  %b Current saldo:
-  = @nasabah.current_saldo
-%p
-  %b Approved:
-  = @nasabah.approved
-%p
-  %b Accomplished:
-  = @nasabah.accomplished
-%p
-  %b Approved at:
-  = @nasabah.approved_at
-%p
-  %b Actor:
-  = @nasabah.actor_id
-%p
-  %b Key storage:
-  = @nasabah.key_storage_id
-%p
-  %b Is archive:
-  = @nasabah.is_archive
+	%tr
+		%td
+			%b Kewarganegaraan
+		%td= @nasabah.kewarganegaraan
+	%tr
+		%td
+			%b No identitas
+		%td= @nasabah.no_identitas
+	%tr
+		%td
+			%b Jenis identitas
+		%td= @nasabah.jenis_identitas
+	%tr
+		%td
+			%b Expire identitas
+		%td= @nasabah.expire_identitas
+	%tr
+		%td{:colspan => 2}
+			%h3 Data Pekerjaan
+	%tr
+		%td
+			%b Pekerjaan
+		%td= @nasabah.pekerjaan
+	%tr
+		%td
+			%b Bidang usaha
+		%td
+			= @nasabah.bidang_usaha
+	%tr
+		%td
+			%b No npwp
+		%td= @nasabah.no_npwp
 
-= link_to 'Edit', edit_nasabah_path(@nasabah)
-\|
-= link_to 'Back', nasabahs_path
+	%tr
+		%td
+			%b No tlp kantor
+		%td
+			= @nasabah.no_tlp_kantor
+
+	%tr
+		%td
+			%b No faximile
+		%td= @nasabah.no_faximile
+	%tr
+		%td{:colspan => 2}
+			%h3 Data Account Bank
+	%tr
+		%td
+			%b Saldo
+		%td= @nasabah.current_saldo
+
+	%tr
+		%td
+			%b Rekening koran
+		%td= @nasabah.rekening_koran
+	
+	%tr
+		%td
+			%b Status rumah tinggal
+		%td= @nasabah.status_rumah_tinggal
+
+
+	%tr
+		%td
+			%b Sumber dana
+		%td= @nasabah.sumber_dana
+	%tr
+		%td
+			%b Tujuan penggunaan rekening
+		%td= @nasabah.tujuan_penggunaan_rekening
+	%tr
+		%td
+			%b Tujuan penggunaan dana
+		%td= @nasabah.tujuan_penggunaan_dana
+	%tr
+		%td
+			%b Nama lengkap ibu kandung
+		%td
+			= @nasabah.nama_lengkap_ibu_kandung
+	%tr
+		%td
+			%b Actor
+		%td= @nasabah.user.nama_lengkap
+	%tr
+		%td
+			%b Approved
+		%td
+			= @nasabah.approved
+	%tr
+		%td
+			%b Accomplished
+		%td
+			= @nasabah.accomplished
+	%tr
+		%td
+			%b Approved at
+		%td
+			= @nasabah.approved_at
+	%tr
+		%td
+			%b Is archive
+		%td= @nasabah.is_archive
+	%tr
+		%td{:colspan => 2}
+
+%hr
+= link_to nasabahs_path, :class => "btn btn-large" do
+	%i.icon-arrow-left
+	Back
+
+= link_to edit_nasabah_path(@nasabah), :class => "btn btn-primary btn-large" do
+	%i.icon-edit
+	Edit
+

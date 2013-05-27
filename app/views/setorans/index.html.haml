@@ -1,0 +1,44 @@
+.row-fluid
+	.span6
+		%h3
+			%i.icon-exchange
+			Setoran
+	.span6		
+%hr
+
+%table.table.table-bordered
+	%thead
+		%tr
+			%th #
+			%th Nasabah
+			%th Teller
+			%th Amount
+			%th Credit
+			%th Debit
+			%th Keterangan
+			%th Action
+	%tody
+		- i = 1
+		- @setorans.each do |setoran|
+			%tr
+				%td= i
+				%td= setoran.nasabah.nama_lengkap
+				%td= setoran.actor.nama_lengkap
+				%td= setoran.amount
+				%td= setoran.credit
+				%td= setoran.debit
+				%td= setoran.keterangan
+				%td
+					.btn-group
+						= link_to setoran, :class => "btn btn-info btn-mini" do
+							%i.icon-search
+						= link_to edit_setoran_path(setoran), :class => "btn btn-primary btn-mini" do
+							%i.icon-edit
+						= link_to setoran, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-mini btn-danger" do
+							%i.icon-remove
+			- i+=1
+%hr
+
+= link_to new_setoran_path, :class => "btn btn-primary" do
+	%i.icon-pencil
+	New Setoran

@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Nasabah:
+  = @setoran.nasabah_id
+%p
+  %b Actor:
+  = @setoran.actor_id
+%p
+  %b Amount:
+  = @setoran.amount
+%p
+  %b Term:
+  = @setoran.term
+%p
+  %b Credit:
+  = @setoran.credit
+%p
+  %b Debit:
+  = @setoran.debit
+%p
+  %b Saldo:
+  = @setoran.saldo
+%p
+  %b Keterangan:
+  = @setoran.keterangan
+
+= link_to 'Edit', edit_setoran_path(@setoran)
+\|
+= link_to 'Back', setorans_path
