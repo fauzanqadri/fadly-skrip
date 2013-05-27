@@ -3,8 +3,8 @@
 		%h3 
 			%i.icon-group
 			Laporan Nasabah
-	.span4
-		= form_for :scope, :url => laporan_get_nasabah_by_product_path, :method => "post", :html => {:class => "form-inline print-action"} do |f|
+	.span4.hide-plis
+		= form_for :scope, :url => laporan_get_nasabah_by_product_path, :method => "post", :html => {:class => "form-inline print-action hide-plis"} do |f|
 			= f.label :nasabah_by_product
 			= f.select :product, options_for_select(Product.all_collection), :class => "hide-pliss"
 			%button.btn

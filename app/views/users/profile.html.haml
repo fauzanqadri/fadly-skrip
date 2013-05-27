@@ -1,0 +1,34 @@
+.row-fluid
+	.span6
+		%h3
+			= current_user.nama_lengkap
+			's Profile
+	.span6
+%table.table
+	%tr
+		%td
+			%b Nik
+		%td= current_user.nik
+	%tr
+		%td
+			%b Nama Lengkap
+			
+		%td= current_user.nama_lengkap
+	%tr
+		%td
+			%b Role
+		%td= current_user.role
+	
+	%tr
+		%td
+			%b Email
+		%td= current_user.email
+	%tr
+		%td
+			
+		%td
+%hr
+= link_to profile_edit_path, :class => "btn btn-primary btn-large" do
+	%i.icon-cog
+	Edit Profile
+		

@@ -1,23 +1,34 @@
 FadlySkrip::Application.routes.draw do
+  root to: 'dashboard#index'
   resources :setorans
+  resources :nasabahs
+  devise_for :users, :skip => [:registrations]
+  resources :users
+  resources :nasabahs do
+    member do 
+      get "approve", action: "approve"
+    end
+  end
+  resources :products do
+    get "/upgrade", :action => "upgrade"
+    post "/upgarde", :action => "do_upgrade"
+  end
+  get "/profile", to: "users#profile"
+  get "/profile/edit", to: "users#edit_profile"
+  post "/profile/edit", to: "users#do_edit_profile"
   match "/get_user", to: "setorans#get_user"
   get "/laporan/nasabah", to: "laporan#nasabah"
   get "/laporan/setoran", to: "laporan#setoran"
   post "/laporan/get_by_range", to: "laporan#get_setoran_by_range"
   post "/laporan/get_nasabah_by_product", to: "laporan#get_nasabah_by_product"
-  resources :products do
-    get "/upgrade", :action => "upgrade"
-    post "/upgarde", :action => "do_upgrade"
-  end
+  
 
 
-  resources :nasabahs
+ 
 
 
-  root to: 'dashboard#index'
-  devise_for :users, :skip => [:registrations]
-  resources :users
-  resources :nasabahs
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -9,6 +9,7 @@ class Setoran < ActiveRecord::Base
   #before_create :validate_completeness
   before_create :set_debit_credit
   before_create :set_saldo
+  before_create :nasabah_completenes
   
   def self.get_by_time times
     self.where(:created_at => ("#{Chronic.parse(times)}".to_time)..(Chronic.parse("today")))
@@ -71,6 +72,13 @@ class Setoran < ActiveRecord::Base
       errors.add(:amount, "amount must bea equal to #{self.nasabah.product.month_credit} or it's multiple")
       return false
     end    
+  end
+  
+  def nasabah_completenes
+    if self.nasabah.current_saldo >= self.nasabah.product.value || self.nasabah.current_saldo == self.nasabah.product.value || ((self.nasabah.current_saldo + self.amount) ==  self.nasabah.product.value)
+      puts "yay"
+      self.nasabah.update_attributes(:accomplished => true)
+    end
   end
   
 end

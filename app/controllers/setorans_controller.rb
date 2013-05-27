@@ -1,4 +1,5 @@
 class SetoransController < ApplicationController
+  load_and_authorize_resource
   # GET /setorans
   # GET /setorans.json
   def index

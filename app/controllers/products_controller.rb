@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  load_and_authorize_resource
   before_filter :clone_product, only: [:upgrade,:do_upgrade] 
   # GET /products
   # GET /products.json

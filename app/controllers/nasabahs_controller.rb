@@ -1,9 +1,9 @@
 class NasabahsController < ApplicationController
+  load_and_authorize_resource
   # GET /nasabahs
   # GET /nasabahs.json
   def index
-    @nasabahs = Nasabah.all
-
+    @nasabahs = Nasabah.paginate(:page => params[:page]).order('created_at desc')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @nasabahs }
@@ -75,6 +75,14 @@ class NasabahsController < ApplicationController
     @nasabah = Nasabah.find(params[:id])
     @nasabah.destroy
 
+    respond_to do |format|
+      format.html { redirect_to nasabahs_url }
+      format.json { head :no_content }
+    end
+  end
+  
+  def approve
+    @nasabah = Nasabah.approve(params[:id])
     respond_to do |format|
       format.html { redirect_to nasabahs_url }
       format.json { head :no_content }

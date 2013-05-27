@@ -67,20 +67,28 @@
 					
 				%td
 					.btn-group
-						= link_to nasabah, :class => "btn btn-mini btn-info" do
-							%i.icon-search
-						= link_to edit_nasabah_path(nasabah), :class => "btn btn-mini btn-primary" do
-							%i.icon-edit
-						= link_to nasabah, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-mini btn-danger" do
-							%i.icon-remove-sign
+						- if can?(:read, Nasabah)
+							= link_to nasabah, :class => "btn btn-mini btn-info" do
+								%i.icon-search
+						- if can?(:edit, Nasabah)
+							= link_to edit_nasabah_path(nasabah), :class => "btn btn-mini btn-primary" do
+								%i.icon-edit
+						- if can?(:destroy, Nasabah)
+							= link_to nasabah, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-mini btn-danger" do
+								%i.icon-remove-sign
+						- if current_user.role == "director"
+							= link_to approve_nasabah_path(nasabah), :class => "btn btn-mini btn-warning" do
+								%i.icon-ok
 			- i+=1
 
 %hr
 .row-fluid
 	.span6
-		= link_to new_nasabah_path, :class => "btn btn-primary" do
-			%i.icon-pencil
-			New Nasabah
+		- if can?(:create, Nasabah)
+			= link_to new_nasabah_path, :class => "btn btn-primary" do
+				%i.icon-pencil
+				New Nasabah
 	.span6
-		/ = will_paginate @users
+		.digg_pagination.pull-right
+			= will_paginate @nasabahs, :container => false
 

@@ -1,0 +1,37 @@
+.row-fluid
+	.span6
+		%h3
+			Edit
+			= current_user.nama_lengkap
+			's Profile
+	.span6
+%hr
+.row-fluid
+	= form_for :user,:url => profile_edit_path, :html => {:class => "form-horizontal span8"} do |f|
+		.control-group
+			= f.label :nama_lengkap, :class => "control-label"
+			.controls
+				=f.text_field :nama_lengkap, :placeholder => "Nama Lengkap", :class => "input-block-level", :value => current_user.nama_lengkap
+		.control-group
+			= f.label :email, :class => "control-label"
+			.controls
+				=f.text_field :email, :placeholder => "Email", :class => "input-block-level", :value => current_user.email
+		.well
+			%h4 Password Field
+			%hr
+			.control-group
+				= f.label :password, :class => "control-label"
+				.controls
+					=f.password_field :password, :placeholder => "Password", :class => "input-block-level"
+			.control-group
+				= f.label :password_confirmation, :class => "control-label"
+				.controls
+					=f.password_field :password_confirmation, :placeholder => "Password", :class => "input-block-level"
+		.form-actions
+			= link_to users_path, :class => "btn" do
+				%i.icon-arrow-left
+				Back
+			%button.btn.btn-primary
+				%i.icon-pencil
+				Edit
+				

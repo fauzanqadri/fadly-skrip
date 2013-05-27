@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-  load_and_authorize_resource
+class UsersController < ApplicationController 
+  load_and_authorize_resource except: [:profile, :edit_profile, :do_edit_profile]
   
   def index
     @users = User.paginate(:page => params[:page]).order('created_at desc')
@@ -73,4 +73,24 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def profile
+  end
+  
+  def edit_profile
+  end
+  
+  def do_edit_profile
+    respond_to do |format|
+      if current_user.update_attributes(params[:user])
+        format.html { redirect_to root_url, notice: 'User was successfully updated.' }
+      else
+         current_user.errors.each do |k,v|
+            flash[:error] = "#{k} #{v}"
+         end
+        format.html { render action: "edit_profile" }
+      end
+    end
+  end
+  
 end

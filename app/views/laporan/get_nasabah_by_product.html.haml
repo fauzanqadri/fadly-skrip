@@ -4,10 +4,10 @@
 			%i.icon-group
 			Laporan Nasabah
 	.span4
-		= form_for :scope, :url => laporan_get_nasabah_by_product_path, :method => "post", :html => {:class => "form-inline print-action"} do |f|
-			= f.label :nasabah_by_product
+		= form_for :scope, :url => laporan_get_nasabah_by_product_path, :method => "post", :html => {:class => "form-inline print-action hide-plis"} do |f|
+			= f.label :nasabah_by_product, :class => "hide-plis"
 			= f.select :product, options_for_select(Product.all_collection), :class => "hide-pliss"
-			%button.btn
+			%button.btn.hide-plis
 				%i.icon-search
 					
 	.span2

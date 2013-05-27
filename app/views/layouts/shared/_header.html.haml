@@ -4,37 +4,43 @@
 			= link_to root_path, :class => "brand" do
 				Bank Syariah AT-TAQWA
 			%ul.nav
-				/ - if can?(:manage, Nasabah)
-				%li
-					= link_to nasabahs_path do
-						%i.icon-group
-						Nasabah
-				%li
-					= link_to setorans_path do
-						%i.icon-exchange
-						Setoran
-				%li.dropdown
-					= link_to "#", :class => "dropdown-toggle", "data-toggle" => "dropdown" do
-						%i.icon-briefcase
-						Laporan
-						%b.caret
-					%ul.dropdown-menu
-						%li
-							= link_to laporan_nasabah_path do
-								%i.icon-group
-								Nasabah
-						%li
-							= link_to laporan_setoran_path do
-								%i.icon-exchange
-								Setoran
-				%li
-					= link_to users_path do
-						%i.icon-user
-						User
-				%li
-					= link_to products_path do
-						%i.icon-barcode
-						Products
+				- if can?(:manage, Nasabah)
+					%li
+						= link_to nasabahs_path do
+							%i.icon-group
+							Nasabah
+				- if can?(:manage, Setoran)
+					%li
+						= link_to setorans_path do
+							%i.icon-exchange
+							Setoran
+				- if current_user.role == "director" || current_user.role == "cs" || current_user.role == "teller"
+					%li.dropdown
+						= link_to "#", :class => "dropdown-toggle", "data-toggle" => "dropdown" do
+							%i.icon-briefcase
+							Laporan
+							%b.caret
+						%ul.dropdown-menu
+							- if current_user.role == "director" || current_user.role == "cs"
+								%li
+									= link_to laporan_nasabah_path do
+										%i.icon-group
+										Nasabah
+							- if current_user.role == "director" || current_user.role == "teller"
+								%li
+									= link_to laporan_setoran_path do
+										%i.icon-exchange
+										Setoran
+				- if can?(:manage, User)
+					%li
+						= link_to users_path do
+							%i.icon-user
+							User
+				- if can?(:manage, Product)
+					%li
+						= link_to products_path do
+							%i.icon-barcode
+							Products
 			%ul.nav.pull-right
 				%li.dropdown
 					= link_to "#", :class => "dropdown-toggle", "data-toggle" => "dropdown" do
@@ -43,11 +49,11 @@
 						%b.caret
 					%ul.dropdown-menu
 						%li
-							= link_to "#" do
+							= link_to profile_path do
 								%i.icon-user
 								Profile
 						%li
-							= link_to "#" do
+							= link_to profile_edit_path do
 								%i.icon-cog
 								Edit Profile
 						%li.divider
